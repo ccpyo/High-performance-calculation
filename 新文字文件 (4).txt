@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(int argc,char *argv[]){
+  int n=strtol(argv[1], NULL, 10);
+  double **a=NULL,**b=NULL,**c=NULL,total_time=0;
+  clock_t start_time, end_time;
+  a=(double **)malloc(sizeof(double*)*n);
+  b=(double **)malloc(sizeof(double*)*n);
+  c=(double **)malloc(sizeof(double*)*n);
+  for(int i=0;i<n;i++){
+     a[i]=(double*)malloc(sizeof(double)*n);
+     b[i]=(double*)malloc(sizeof(double)*n);
+     c[i]=(double*)malloc(sizeof(double)*n);
+  }
+
+  /*for(int i=0;i<argc;i++){
+     printf("%s\n",argv[i]);
+  }
+
+  int cnt=2;
+
+  for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+            a[i][j]=strtod(argv[cnt],NULL);
+            printf("%8.3lf",a[i][j]);
+    }
+    printf("\n");
+  }
+  for (int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+      b[i][j]=strtod(argv[cnt],NULL);
+       printf("%8.3lf",b[i][j]);
+    }
+    printf("\n");
+  }*/
+
+   printf("\n");
+   start_time = clock();
+  for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+       for(int k=0;k<n;k++){
+           c[i][j]=c[i][j]+(a[i][k]*b[k][i]);
+        }
+    }
+  }
+   end_time = clock();
+ /*for(int i=0;i<n;i++){
+     for(int j=0;j<n;j++){
+        printf("%8.3lf",c[i][j]);
+     }
+    printf("\n");
+ }*/
+
+    total_time = (float)(end_time - start_time)/CLOCKS_PER_SEC;
+
+    printf("Time : %f sec \n", total_time);
+    for(int i=0;i<n;i++){
+        free(a[i]);
+        free(b[i]);
+        free(c[i]);
+    }
+   free(a);
+   free(b);
+   free(c);
+ }
+
